@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  app:
+    image: tiket-app:v1
+    volumes:
+      - ./:/app 
+    environment:
+      - dev
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    depends_on:
+        - db
+  
+  db:
+    image: mongo
+    volumes:
+      - .docker/data/db:/data/db
+    restart: unless-stopped
